@@ -5,42 +5,42 @@ import Cards from './utils/Cards';
 import { getAllByDisplayValue } from '@testing-library/react';
 
 function PopupWithForm(props) {
+  let isOpen = (true)
 
-    let isOpen = (true)
+  const popupName = `popup ${props.name}-popup ${isOpen ? 'popup_visible' : ''}`
+  const overlayName = `popup__overlay ${props.name}-popup__overlay`
+  const containerName = `popup__container ${props.name}-popup__container`
+  const closeButtonName = `popup__close-button ${props.name}-popup__close-button`
+  const formName = `form ${props.name}-form`
+  const popupTitle = `${props.title}`
 
-    const popupName = `popup ${props.name}-popup ${isOpen ? 'popup_visible' : ''}`
-    const overlayName = `popup__overlay ${props.name}-popup__overlay`
-    const containerName = `popup__container ${props.name}-popup__container`
-    const closeButtonName = `popup__close-button ${props.name}-popup__close-button`
-    const formName = `form ${props.name}-form`
-    const popupTitle = `${props.title}`
-
-    return (
-      <div className= {popupName}>
-        <div className={overlayName}></div>
-        <div className={containerName}>
-          <button type="button" aria-label="close" className={closeButtonName} onClick={isOpen = props.onClose}></button>
-          <form name="form" className={formName}>
-            <h2 className="form__title">{popupTitle}</h2>
-            <fieldset className="form__fieldset">
-              {props.children}
-            </fieldset>
-          </form>
-        </div>
+  return (
+    <div className= {popupName}>
+      <div className={overlayName} onClick={props.onClose}></div>
+      <div className={containerName}>
+        <button type="button" aria-label="close" className={closeButtonName} onClick={props.onClose}></button>
+        <form name="form" className={formName}>
+          <h2 className="form__title">{popupTitle}</h2>
+          <fieldset className="form__fieldset">
+            {props.children}
+          </fieldset>
+        </form>
       </div>
-    ) 
+    </div>
+  ) 
 }
 
-function imagePopup(props){
+function ImagePopup(props){
   let isOpen = (true)
+
   const className = `popup image-popup ${isOpen ? 'popup_visible' : ''}`
 
   return (
     <div className={className}>
-      <div className="popup__overlay image-popup__overlay"></div>
+      <div className="popup__overlay image-popup__overlay" onClick={props.onClose}></div>
       <div className="image-popup__container">
-        <button type="button" aria-label="close" className="popup__close-button image-popup__close-button" onClick={isOpen = props.onClose}></button>
-        <img className="image-popup__image" />
+        <button type="button" aria-label="close" className="popup__close-button image-popup__close-button" onClick={props.onClose}></button>
+        <img className="image-popup__image" src={props.imageLink} alt={props.imageName} />
         <p className="image-popup__caption"></p>
       </div>
     </div>
@@ -51,6 +51,7 @@ function Main(props) {
   const [userName, setUserName] = React.useState([])
   const [userDescription, setUserDescription] = React.useState([])
   const [userAvatar, setUserAvatar] = React.useState([])
+  const [cards, setcards] = React.useState([])
 
   React.useEffect(() => {
     let mounted = true;
@@ -65,6 +66,19 @@ function Main(props) {
       .catch(console.log)
     return () => mounted = false;
   }, [])
+
+  React.useEffect(() => {
+    let mounted = true;
+    api.getInitialCards()
+      .then((cardData) => {
+        if(mounted) {
+          setcards(cardData)
+        }
+      })
+      .catch(console.log)
+    return () => mounted = false;
+  }, [])
+
 
   return (
     <main className="content">
@@ -107,7 +121,9 @@ function Main(props) {
         <button type="submit" aria-label="create" className="form__button">Yes</button>
       </PopupWithForm>}
 
-      <Cards onDeletePlaceClick={props.onDeletePlaceClick}/>
+      <Cards handleCards={cards} onCardClick={props.cardClick} onDeletePlaceClick={props.onDeletePlaceClick}/>
+
+      {props.imagePopupOpen && <ImagePopup onClose={props.handleClose} imageLink={props.handleInfo.link} imageName={props.handleInfo.name} />}
 
     </main>
   )
