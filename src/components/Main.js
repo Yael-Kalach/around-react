@@ -1,29 +1,9 @@
 import avatar from '../images/photos/Avatar.png'
 import React, { useState } from 'react';
 import api from './utils/api';
-// import Cards from './utils/Cards';
+import Card from './utils/Card.js';
 import PopupWithForm from './utils/PopupWithForm';
 import { getAllByDisplayValue } from '@testing-library/react';
-
-function Cards(props) {
-  return(
-    <section className="elements">
-    {props.handleCards.map((card, i) => (
-      <article key = {i} className="elements__card">
-        <button type="button" aria-label="trash" className="elements__button elements__button_trash" onClick={props.onDeletePlaceClick}></button>
-        <img className="elements__image" src={card.link} alt={card.name} onClick={() => props.onCardClick(card)} />
-        <div className="elements__title">
-          <h2 className="elements__text">{card.name}</h2>
-          <div className="elements__container">
-            <button type="button" aria-label="like" className="elements__button elements__button_like"></button>
-            <span className="elements__counter">{card._id.likes}</span>
-          </div>
-        </div>
-      </article>
-    ))}
-    </section>
-  )
-}
 
 function Main(props) {
   const [userName, setUserName] = React.useState([])
@@ -99,7 +79,7 @@ function Main(props) {
         <button type="submit" aria-label="create" className="form__button">Yes</button>
       </PopupWithForm>
 
-      <Cards handleCards={cards} onCardClick={props.onCardClick} onDeletePlaceClick={props.onDeletePlaceClick}/>
+      <Card handleCards={cards} onCardClick={props.onCardClick} onDeletePlaceClick={props.onDeletePlaceClick}/>
 
       {props.children}
     </main>

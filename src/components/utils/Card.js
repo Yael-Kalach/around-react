@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Cards(props) {
+function Card(props) {
     return(
       <section className="elements">
       {props.handleCards.map((card, i) => (
@@ -19,4 +19,4 @@ function Cards(props) {
       </section>
     )
   }
-export default Cards
+export default Card
