@@ -11,8 +11,8 @@ function App() {
   const [isDeletePlacePopupOpen, setisDeletePlacePopupOpen] = React.useState()
   const [selectedCard, setSelectedCard] = React.useState(false, {});
 
-  function handleCardClick() {
-    setSelectedCard(!selectedCard)
+  function handleCardClick(card) {
+    setSelectedCard(card)
   }
 
   function handleEditAvatarClick() {
@@ -52,8 +52,8 @@ function App() {
         editProfilePopupOpen={isEditProfilePopupOpen} 
         editAvatarPopupOpen={isEditAvatarPopupOpen} 
         addPlacePopupOpen={isAddPlacePopupOpen} 
-        cardClick={handleCardClick}>
-        {selectedCard && <ImagePopup onClose={closeAllPopups} imageLink={selectedCard.link} imageName={selectedCard.name}/>}
+        onCardClick={handleCardClick}>
+        <ImagePopup isOpen={selectedCard} onClose={closeAllPopups} imageLink={selectedCard.link} imageName={selectedCard.name}/>
       </Main>
       <Footer />
     </div>

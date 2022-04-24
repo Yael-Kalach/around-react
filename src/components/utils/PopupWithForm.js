@@ -1,7 +1,4 @@
 function PopupWithForm(props) {
-    let isOpen = (true)
-  
-    const popupName = `popup ${props.name}-popup ${isOpen ? 'popup_visible' : ''}`
     const overlayName = `popup__overlay ${props.name}-popup__overlay`
     const containerName = `popup__container ${props.name}-popup__container`
     const closeButtonName = `popup__close-button ${props.name}-popup__close-button`
@@ -9,7 +6,7 @@ function PopupWithForm(props) {
     const popupTitle = `${props.title}`
   
     return (
-      <div className= {popupName}>
+      <div className= {`popup ${props.name}-popup ${props.isOpen ? 'popup_visible' : ''}`}>
         <div className={overlayName} onClick={props.onClose}></div>
         <div className={containerName}>
           <button type="button" aria-label="close" className={closeButtonName} onClick={props.onClose}></button>
