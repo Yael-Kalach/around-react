@@ -2,12 +2,16 @@ import React from 'react';
 
 function Cards(props) {
 
+  function handleClick() {
+    props.onCardClick(props.card);
+  } 
+
     return(
       <section className="elements">
       {props.handleCards.map((card, i) => (
         <article key = {i} className="elements__card">
           <button type="button" aria-label="trash" className="elements__button elements__button_trash" onClick={props.onDeletePlaceClick}></button>
-          <img className="elements__image" src={card.link} alt={card.name} onClick={() => props.onCardClick(props.card)} />
+          <img className="elements__image" src={card.link} alt={card.name} onClick={handleClick} />
           <div className="elements__title">
             <h2 className="elements__text">{card.name}</h2>
             <div className="elements__container">

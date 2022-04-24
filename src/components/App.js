@@ -2,16 +2,16 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import React from 'react';
+import ImagePopup from './utils/ImagePopup';
 
 function App() {
   const [isEditAvatarPopupOpen, setisEditAvatarPopupOpen] = React.useState()
   const [isEditProfilePopupOpen, setisEditProfilePopupOpen] = React.useState()
   const [isAddPlacePopupOpen, setisAddPlacePopupOpen] = React.useState()
   const [isDeletePlacePopupOpen, setisDeletePlacePopupOpen] = React.useState()
-  const [selectedCard, setSelectedCard] = React.useState()
+  const [selectedCard, setSelectedCard] = React.useState(false, {});
 
-  function handleCardClick(card) {
-    setSelectedCard(card)
+  function handleCardClick() {
     setSelectedCard(!selectedCard)
   }
 
@@ -36,7 +36,7 @@ function App() {
     setisEditAvatarPopupOpen(false);
     setisAddPlacePopupOpen(false);
     setisDeletePlacePopupOpen(false);
-    setSelectedCard(null);
+    setSelectedCard(false);
   }
 
   return (
@@ -52,10 +52,9 @@ function App() {
         editProfilePopupOpen={isEditProfilePopupOpen} 
         editAvatarPopupOpen={isEditAvatarPopupOpen} 
         addPlacePopupOpen={isAddPlacePopupOpen} 
-        imagePopupOpen={selectedCard}
-        handleInfo={selectedCard}
-        cardClick={handleCardClick} 
-        />
+        cardClick={handleCardClick}>
+        {selectedCard && <ImagePopup onClose={closeAllPopups} imageLink={selectedCard.link} imageName={selectedCard.name}/>}
+      </Main>
       <Footer />
     </div>
   );
