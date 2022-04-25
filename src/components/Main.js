@@ -1,40 +1,30 @@
-import avatar from '../images/photos/Avatar.png'
 import React, { useState } from 'react';
 import api from './utils/api';
-import Card from './utils/Card.js';
-import PopupWithForm from './utils/PopupWithForm';
+import Card from './Card.js';
 import { getAllByDisplayValue } from '@testing-library/react';
 
 function Main(props) {
-  const [userName, setUserName] = React.useState([])
-  const [userDescription, setUserDescription] = React.useState([])
-  const [userAvatar, setUserAvatar] = React.useState([])
+  const [userName, setUserName] = React.useState()
+  const [userDescription, setUserDescription] = React.useState()
+  const [userAvatar, setUserAvatar] = React.useState()
   const [cards, setcards] = React.useState([])
 
   React.useEffect(() => {
-    let mounted = true;
     api.getUserInformation()
       .then((userData) => {
-        if(mounted) {
-          setUserName(userData.name)
-          setUserDescription(userData.about)
-          setUserAvatar(userData.avatar)
-        }
+        setUserName(userData.name)
+        setUserDescription(userData.about)
+        setUserAvatar(userData.avatar)
       })
       .catch(console.log)
-    return () => mounted = false;
   }, [])
 
   React.useEffect(() => {
-    let mounted = true;
     api.getInitialCards()
       .then((cardData) => {
-        if(mounted) {
-          setcards(cardData)
-        }
+        setcards(cardData)
       })
       .catch(console.log)
-    return () => mounted = false;
   }, [])
 
 
@@ -53,33 +43,7 @@ function Main(props) {
         <button type="button" aria-label="add" className="profile__button profile__button_type_add" onClick={props.onAddPlaceClick}></button>
       </section>
 
-      <PopupWithForm name='edit' title='Edit profile' isOpen={props.editProfilePopupOpen} onClose={props.handleClose}>
-        <input id="name-input" type="text" name="name" placeholder="Name" className="form__input_type_name form__input" required minLength="2" maxLength="40" />
-        <span id="name-input-error" className="form__error"></span>
-        <input id="description-input" type="text" name="about" placeholder="About me" className="form__input_type_about form__input" required minLength="2" maxLength="200" />
-        <span id="description-input-error" className="form__error"></span>
-        <button type="submit" aria-label="save" className="form__button">Save</button>
-      </PopupWithForm>
-
-      <PopupWithForm name='avatar' title='Change profile picture' isOpen={props.editAvatarPopupOpen} onClose={props.handleClose}>
-        <input id="avatar-input" type="url" name="avatar" placeholder="Avatar link" className="form__input_type_avatar form__input" required />
-        <span id="avatar-input-error" className="form__error"></span>
-        <button type="submit" aria-label="save" className="form__button">Save</button>
-      </PopupWithForm>
-
-      <PopupWithForm name='add' title='New place' isOpen={props.addPlacePopupOpen} onClose={props.handleClose}>
-        <input id="title-input" type="text" name="name" placeholder="Title" className="form__input_type_title form__input" required minLength="1" maxLength="30" />
-        <span id="title-input-error" className="form__error"></span>
-        <input id="image-input" type="url" name="link" placeholder="Image link" className="form__input_type_image form__input" required />
-        <span id="image-input-error" className="form__error"></span>
-        <button type="submit" aria-label="create" className="form__button">Create</button>
-      </PopupWithForm>
-
-      <PopupWithForm name='delete-card' title='Are you sure?' isOpen={props.deletePlacePopupOpen} onClose={props.handleClose}>
-        <button type="submit" aria-label="create" className="form__button">Yes</button>
-      </PopupWithForm>
-
-      <Card handleCards={cards} onCardClick={props.onCardClick} onDeletePlaceClick={props.onDeletePlaceClick}/>
+      {cards.map((card) => (<Card card={card} link={card.link} text={card.name} likesCount={card._id.likes} key={card._id} onCardClick={props.onCardClick} />))}
 
       {props.children}
     </main>

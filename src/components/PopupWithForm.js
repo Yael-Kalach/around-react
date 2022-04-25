@@ -14,6 +14,7 @@ function PopupWithForm(props) {
             <h2 className="form__title">{popupTitle}</h2>
             <fieldset className="form__fieldset">
               {props.children}
+              <button type="submit" aria-label="save" className="form__button">{props.buttonText}</button>
             </fieldset>
           </form>
         </div>
