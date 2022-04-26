@@ -42,10 +42,10 @@ function Main(props) {
         </div>
         <button type="button" aria-label="add" className="profile__button profile__button_type_add" onClick={props.onAddPlaceClick}></button>
       </section>
-
-      {cards.map((card) => (<Card card={card} link={card.link} text={card.name} likesCount={card._id.likes} key={card._id} onCardClick={props.onCardClick} />))}
-
-      {props.children}
+      <section className="elements">
+        {cards.map((card) => (<Card card={card} link={card.link} text={card.name} likesCount={card._id.likes} key={card._id} handleClick={props.onCardClick} />))}
+      </section>
+        {props.children}
     </main>
   )
 }
