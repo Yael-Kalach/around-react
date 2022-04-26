@@ -8,6 +8,7 @@ function Main(props) {
   const [userDescription, setUserDescription] = React.useState()
   const [userAvatar, setUserAvatar] = React.useState()
   const [cards, setcards] = React.useState([])
+  const { onCardClick } = props;
 
   React.useEffect(() => {
     api.getUserInformation()
@@ -43,7 +44,13 @@ function Main(props) {
         <button type="button" aria-label="add" className="profile__button profile__button_type_add" onClick={props.onAddPlaceClick}></button>
       </section>
       <section className="elements">
-        {cards.map((card) => (<Card card={card} link={card.link} text={card.name} likesCount={card._id.likes} key={card._id} handleClick={props.onCardClick} />))}
+        {cards.map((card) => (<Card
+            key={card._id}
+            card={card}
+            likesCount={card._id.likes}
+            onCardClick={onCardClick}
+          />
+        ))}
       </section>
         {props.children}
     </main>

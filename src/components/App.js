@@ -71,7 +71,7 @@ function App() {
 
         <PopupWithForm name='delete-card' title='Are you sure?' isOpen={isDeletePlacePopupOpen} onClose={closeAllPopups} buttonText='Yes' />
 
-        <ImagePopup isOpen={selectedCard} onClose={closeAllPopups} imageLink={selectedCard} imageName={selectedCard}/>
+        <ImagePopup isOpen={selectedCard} onClose={closeAllPopups} card={selectedCard}/>
 
       </Main>
       <Footer />
