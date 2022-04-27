@@ -4,9 +4,9 @@ import Card from './Card.js';
 import { getAllByDisplayValue } from '@testing-library/react';
 
 function Main(props) {
-  const [userName, setUserName] = React.useState()
-  const [userDescription, setUserDescription] = React.useState()
-  const [userAvatar, setUserAvatar] = React.useState()
+  const [userName, setUserName] = React.useState('')
+  const [userDescription, setUserDescription] = React.useState('')
+  const [userAvatar, setUserAvatar] = React.useState('')
   const [cards, setcards] = React.useState([])
   const { onCardClick } = props;
 
