@@ -75,6 +75,14 @@ class Api {
       })
         .then(this._checkResponse)
     }
+
+    changeLikeCardStatus(cardId, isLiked) {
+      if (!isLiked) {
+        return this.likeCard(cardId);
+      } else {
+        return this.unlikeCard(cardId);
+      }
+    }
   }
   
 const api = new Api({
