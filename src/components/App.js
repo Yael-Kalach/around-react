@@ -69,7 +69,7 @@ function App() {
   function handleAddPlaceSubmit(){
     api.createCard()
     .then((res) => {
-      const cardElement = res.map((card) => (
+      const newCard = res.map((card) => (
         <Card
           key={card._id}
           card={card}
@@ -78,7 +78,7 @@ function App() {
           onCardDelete={handleCardDelete}
         ></Card>
       ));
-      setCards([...cards, cardElement]);
+      setCards([newCard, ...cards]);
     })
     .catch((error) => console.log(error));
   }
