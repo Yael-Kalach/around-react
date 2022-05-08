@@ -76,8 +76,8 @@ class Api {
         .then(this._checkResponse)
     }
 
-    changeLikeCardStatus(cardId, isLiked) {
-      if (!isLiked) {
+    changeLikeCardStatus(cardId, isNotLiked) {
+      if (isNotLiked) {
         return this.likeCard(cardId);
       } else {
         return this.unlikeCard(cardId);
