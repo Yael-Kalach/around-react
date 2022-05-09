@@ -12,13 +12,13 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import Card from './Card';
 
 function App() {
-  const [isEditAvatarPopupOpen, setisEditAvatarPopupOpen] = React.useState(false)
-  const [isEditProfilePopupOpen, setisEditProfilePopupOpen] = React.useState(false)
-  const [isAddPlacePopupOpen, setisAddPlacePopupOpen] = React.useState(false)
-  const [isDeletePlacePopupOpen, setisDeletePlacePopupOpen] = React.useState(false)
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false)
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false)
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false)
+  const [isDeletePlacePopupOpen, setIsDeletePlacePopupOpen] = React.useState(false)
   const [selectedCard, setSelectedCard] = React.useState(null);
   const [cards, setCards] = React.useState([])
-  const [currentUser, setCurrentUser] = React.useState('');
+  const [currentUser, setCurrentUser] = React.useState([]);
 
   React.useEffect(() => {
     api.getUserInformation()
@@ -70,26 +70,26 @@ function App() {
   }
 
   function handleEditAvatarClick() {
-    setisEditAvatarPopupOpen(!isEditAvatarPopupOpen)
+    setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen)
   }
 
   function handleEditProfileClick() {
-    setisEditProfilePopupOpen(!isEditProfilePopupOpen)
+    setIsEditProfilePopupOpen(!isEditProfilePopupOpen)
   }
 
   function handleAddPlaceClick() {
-    setisAddPlacePopupOpen(!isAddPlacePopupOpen)
+    setIsAddPlacePopupOpen(!isAddPlacePopupOpen)
   }
 
   function handleDeletePlaceClick() {
-    setisDeletePlacePopupOpen(!isDeletePlacePopupOpen)
+    setIsDeletePlacePopupOpen(!isDeletePlacePopupOpen)
   }
 
   function closeAllPopups(){
-    setisEditProfilePopupOpen(false);
-    setisEditAvatarPopupOpen(false);
-    setisAddPlacePopupOpen(false);
-    setisDeletePlacePopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setIsDeletePlacePopupOpen(false);
     setSelectedCard(null);
   }
 

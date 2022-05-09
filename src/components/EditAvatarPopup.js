@@ -12,8 +12,10 @@ function EditAvatarPopup (props){
     e.preventDefault();
   
     props.onUpdateAvatar({
-        avatar: avatar,
-      });
+      avatar: avatar,
+    });
+
+    setAvatar('');
   } 
 
   return(

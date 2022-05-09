@@ -20,6 +20,8 @@ function AddPlacePopup (props){
         name: name,
         link: link,
       });
+    setLink('');
+    setName('');
   } 
 
   return(
