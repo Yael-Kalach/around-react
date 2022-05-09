@@ -1,7 +1,7 @@
 import React from "react"
 import PopupWithForm from "./PopupWithForm";
 
-function AddPlacePopup (props){
+function AddPlacePopup ({onSubmitCard, isOpen, onClose}){
   const [name, setName] = React.useState('')
   const [link, setLink] = React.useState('')
 
@@ -16,16 +16,21 @@ function AddPlacePopup (props){
   function handleSubmit(e) {
     e.preventDefault();
   
-    props.onSubmitCard({
+    onSubmitCard({
         name: name,
         link: link,
       });
-    setLink('');
-    setName('');
   } 
 
+  React.useEffect(() => {
+    if (isOpen) {
+      setName(''); 
+      setLink(''); 
+    }
+  }, [isOpen])
+
   return(
-    <PopupWithForm name='add' title='New place' isOpen={props.isOpen} onSubmit={handleSubmit} onClose={props.onClose} buttonText='Create'>
+    <PopupWithForm name='add' title='New place' isOpen={isOpen} onSubmit={handleSubmit} onClose={onClose} buttonText='Create'>
       <input id="title-input" type="text" name="name" placeholder="Title" value={name} onChange={handleAddTitle} className="form__input_type_title form__input" required minLength="1" maxLength="30" />
       <span id="title-input-error" className="form__error"></span>
       <input id="image-input" type="url" name="link" placeholder="Image link" value={link} onChange={handleAddLink} className="form__input_type_image form__input" required />

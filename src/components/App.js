@@ -18,7 +18,7 @@ function App() {
   const [isDeletePlacePopupOpen, setIsDeletePlacePopupOpen] = React.useState(false)
   const [selectedCard, setSelectedCard] = React.useState(null);
   const [cards, setCards] = React.useState([])
-  const [currentUser, setCurrentUser] = React.useState([]);
+  const [currentUser, setCurrentUser] = React.useState({});
 
   React.useEffect(() => {
     api.getUserInformation()
